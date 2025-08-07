@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ensino Médio Integrado com ADS</title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        :root {
+            --primary: #00ffe7;
+            --primary-dark: #0a192f;
+            --accent: #1766d1;
+            --card-bg: #101c2c;
+            --text-main: #eaf6fb;
+            --text-accent: #00ffe7;
+            --card-border: #1766d1;
+        }
+
+        /* Reset e básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        header {
+            background: #101c2c;
+            color: var(--primary);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 12px rgba(0, 255, 231, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #101c2c 70%, #1766d1 100%);
+            padding: 4rem 2rem 3rem 2rem;
+            text-align: left;
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 8px 32px rgba(0, 255, 231, 0.07);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 1.2rem;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #eaf6fb;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero .btn-main {
+            background: var(--primary);
+            color: #101c2c;
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 1rem 2.2rem;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 255, 231, 0.15);
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .hero .btn-main:hover {
+            background: #1766d1;
+            color: #fff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .cards-row {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0, 255, 231, 0.08);
+            padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+            flex: 1 1 320px;
+            min-width: 280px;
+            max-width: 340px;
+            color: var(--text-main);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(0, 255, 231, 0.18);
+            border-color: var(--primary);
+        }
+
+        .info-card i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+        }
+
+        .info-card p {
+            color: #eaf6fb;
+            font-size: 1rem;
+        }
+
+        /* Separador */
+        .separator {
+            border: 0;
+            height: 2px;
+            background-color: var(--primary);
+            background-image: linear-gradient(to right, rgba(0, 255, 231, 0), var(--primary), rgba(0, 255, 231, 0));
+            margin: 4rem 0;
+        }
+
+        /* Seção da roleta */
+        #roleta-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        #roleta {
+            position: relative;
+            text-align: center;
+        }
+
+        #canvas {
+            background: #fff;
+            border-radius: 50%;
+            display: block;
+        }
+
+        #ponteiro {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 20px solid red;
+            z-index: 2;
+        }
+
+        .itens-container {
+            max-width: 300px;
+        }
+
+        #itens {
+            display: flex;
+            margin: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        #itens input {
+            flex: 1;
+            padding: 0.5rem;
+        }
+
+        .btn-main {
+            background: #00ffe7;
+            border: none;
+            color: #0a192f;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .lista-itens {
+            background: var(--card-bg);
+            padding: 1rem;
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .lista-itens ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .lista-itens li {
+            margin-bottom: 0.5rem;
+            padding: 0.3rem 0.5rem;
+            background: #132c44;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .lista-itens li button {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .resultado {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: var(--text-accent);
+        }
+
+        /* Carrossel */
+        .swiper {
+            width: 100%;
+            padding-bottom: 2rem;
+        }
+
+        .swiper-slide {
+            background: var(--card-bg);
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 255, 231, 0.10);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            border: 2px solid var(--card-border);
+        }
+
+        .swiper-slide img {
+            width: 80%;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--primary);
+        }
+
+        /* Footer moderno */
+        footer {
+            background: #101c2c;
+            color: #eaf6fb;
+            padding: 2rem 1rem 1rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -2px 12px rgba(0, 255, 231, 0.10);
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            gap: 0.5rem;
+            color: var(--primary);
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: var(--primary);
+            font-size: 1.7rem;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #fff;
+        }
+
+        .footer-copy {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #eaf6fb;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .cards-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero {
+                padding: 2rem 1rem 2rem 1rem;
+            }
+
+            main {
+                padding: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Ensino Médio Técnico Integrado com ADS
+        <nav>
+            <a href="#">Início</a>
+            <a href="materias.html">Matérias</a>
+        </nav>
+    </header>
+    <section class="hero" data-aos="fade-down">
+        <h1>Impulsione seu futuro com <span style="color:var(--text-accent)">Tecnologia</span></h1>
+        <p>
+            Conheça o Ensino Médio Integrado com Desenvolvimento de Sistemas e prepare-se para o futuro! <br> Com uma formação completa e moderna para atender as necessidades do mercado de trabalho, este curso é ideal para quem deseja se destacar na área de tecnologia.
+        </p>
+        <button class="btn-main">Continue aqui e descubra mais</button>
+    </section>
+    <main>
+        <div class="cards-row">
+            <div class="info-card" data-aos="fade-up">
+                <i class='bx bx-book-open'></i>
+                <h3>Tenha acesso a conteúdos modernos além do básico</h3>
+                <p>Tenha acesso a disciplinas acadêmicas e técnicas, com materiais atualizados e projetos práticos.</p>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="100">
+                <i class='bx bx-bulb'></i>
+                <h3>Didática moderna, aprenda fazendo</h3>
+                <p>Aprenda com desafios reais, projetos práticos e conheça oque ocorre por trás da internet.</p>
+            </div>
+            <div class="info-card" data-aos="fade-up" data-aos-delay="200">
+                <i class='bx bx-certification'></i>
+                <h3>Certificação</h3>
+                <p>Ao concluir o curso, você terá um destaque maior para a área, com um certificado de conclusão para você.</p>
+            </div>
+        </div>
+
+        <hr class="separator">
+
+        <section class="slide card" data-aos="flip-left">
+            <img src="Imagem do WhatsApp de 2025-08-05 à(s) 15.27.27_443ea349.jpg" width="350" height="400" alt="Estudantes em sala de aula" />
+            <div class="text-content">
+                <h2>O que é o Ensino Médio Integrado?</h2>
+                <p>
+                    O Ensino Médio Integrado une o conteúdo tradicional do ensino médio com uma formação técnica em Desenvolvimento de Sistemas.
+                    Prepare-se para o mercado de trabalho ou para o ensino superior com uma base sólida e prática. <br> <strong>Assim, você não cai de cabeça no seu futuro e pode voar para maiores alturas!</strong>
+                </p>
+            </div>
+        </section>
+
+        <hr class="separator">
+
+        <section class="slide card" data-aos="zoom-in">
+            <img src="Imagem do WhatsApp de 2025-08-05 à(s) 15.27.26_2959b5b4.jpg" width="400" height="400" alt="Programação e tecnologia" />
+            <div class="text-content">
+                <h2>O que é esse curso?</h2>
+                <p>
+                    O curso de Análise e Desenvolvimento de Sistemas (ADS) oferece uma formação completa em tecnologia da informação, com foco em programação, desenvolvimento de software e gestão de projetos.
+                    Aprenda a criar soluções inovadoras, trabalhar em equipe e a trabalhar com as tecnologias mais atuais do mercado. <br> Veja abaixo alguns exemplos:<p><br>
+                </p>
+                <ul>
+                    <li>Desenvolvimento de sistemas web e aplicativos móveis</li>
+                    <li>Programação em linguagens como Java, Python, JavaScript e mais</li>
+                    <li>Banco de dados, redes e segurança da informação</li>
+                    <li>Metodologias ágeis e gestão de projetos</li>
+                    <li>Desenvolvimento de jogos e interfaces gráficas</li>
+                </ul>
+                <p> <br>
+                    Forme-se para atuar em empresas de tecnologia, startups ou como empreendedor!
+                </p>
+            </div>
+        </section>
+
+        <hr class="separator">
+
+        <section class="slide card" data-aos="fade-up">
+            <img src="Imagem do WhatsApp de 2025-08-05 à(s) 15.27.24_1b928531.jpg" width="500" height="200" alt="Equipe de trabalho" />
+            <div class="text-content">
+                <h2>Mercado de Trabalho</h2>
+                <p>
+                    O mercado de trabalho na área de tecnologia permanece sempre com falta de profissionais qualificados.
+                    Segundo o CAGED, o setor de TI é um dos que mais geram empregos no Brasil. <br> <br>
+                    O mercado de TI está em constante crescimento. Profissionais de ADS são requisitados em empresas,
+                    órgãos públicos e startups. Prepare-se para oportunidades reais!
+                </p>
+            </div>
+        </section>
+
+        <hr class="separator">
+
+        <section id="roleta-section">
+            <h2 style="text-align:center; color:var(--primary); width:100%; margin-bottom:2rem;">Roleta Interativa</h2>
+            <div id="roleta">
+                <div id="ponteiro"></div>
+                <canvas id="canvas" width="300" height="300"></canvas>
+            </div>
+            <div class="itens-container">
+                <div id="itens">
+                    <input type="text" id="novoItem" placeholder="Adicionar item...">
+                    <button onclick="adicionarItem()" class="btn-main">+</button>
+                </div>
+                <button onclick="girarRoleta()" class="btn-main" style="width: 100%;">Girar Roleta</button>
+                <div class="lista-itens">
+                    <h3>Itens atuais:</h3>
+                    <ul id="listaItens"></ul>
+                </div>
+                <div class="resultado" id="resultado"></div>
+            </div>
+        </section>
+
+        <hr class="separator">
+
+        <section>
+            <h2 style="text-align:center; color:var(--primary); margin-bottom:2rem;" data-aos="fade-down">Projetos
+                Desenvolvidos</h2>
+            <div class="swiper" data-aos="zoom-in">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <!-- Exibição do design gráfico com foto do hamburguer-->
+                        <img src="Ante.png" width="50" height="500" alt="Aplicativo móvel" />
+                        <h3 style="color:var(--primary);">Estudo de Aplicação de Design Moderno</h3>
+                        <p>Desenvolvemos vários designs com conceitos importantes e aplicados. <bR>Confira alguns exemplos no nosso stand na Feira CEJAC.</p>
+                    </div>
+                    <!-- Exibição do design gráfico com foto do hamburguer-->
+                    <div class="swiper-slide">
+                        <img src="https://github.com/user-attachments/assets/037ac23c-5069-40a0-b8fd-54f6660c4f27" width="200" height="300" alt="Plataforma web" />
+                        <h3 style="color:var(--primary);">Gerenciamento de Dados com Python</h3>
+                        <p>O projeto aqui é uma interface feita em Python para gerenciar dados de cadastro de fornecedores e entregas.<br> Completamente funcional para cadastrar fornecedores, status de encomendas, dados como Nome, ID, Contato, Filial e Datas de emissão. <br>
+                            <a href="https://github.com/whironn/projeto-individual">Link de acesso ao Projeto</a></p>
+                    </div>
+                    <!-- Exibição do design gráfico com foto do hamburguer-->
+
+                    <div class="swiper-slide">
+                        <img src="feiramyfleetbanner.png" width="160" height="400" alt="Portfólio digital" />
+                        <h3 style="color:var(--primary);">Torne suas habilidades em dinheiro</h3>
+                        <p>Construa seus próprios sistemas, sites e aplicativos para ter acesso a uma renda extra ou até mesmo um negócio próprio
+                        </p>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class='bx bx-code-alt'></i>
+                <span>Ensino Médio Integrado com ADS</span>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-linkedin'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            &copy; 2025 Ensino Médio Integrado com ADS. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        AOS.init({ duration: 900, once: true });
+
+        const swiper = new Swiper('.swiper', {
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            effect: 'slide'
+        });
+
+        // ROLETA
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        let itens = ["Python", "Java", "Flutter", "HTML", "CSS"];
+        let anguloAtual = 0;
+        let velocidade = 0;
+        let girando = false;
+
+        function desenharRoleta() {
+            const total = itens.length;
+            if (total === 0) {
+                ctx.clearRect(0, 0, 300, 300);
+                return;
+            }
+            const anguloPorItem = 2 * Math.PI / total;
+            ctx.clearRect(0, 0, 300, 300);
+            for (let i = 0; i < total; i++) {
+                const angulo = anguloAtual + i * anguloPorItem;
+                ctx.beginPath();
+                ctx.moveTo(150, 150);
+                ctx.arc(150, 150, 150, angulo, angulo + anguloPorItem);
+                ctx.fillStyle = `hsl(${(i * 360) / total}, 70%, 60%)`;
+                ctx.fill();
+                ctx.save();
+                ctx.translate(150, 150);
+                ctx.rotate(angulo + anguloPorItem / 2);
+                ctx.fillStyle = "#000";
+                ctx.font = "14px sans-serif";
+                ctx.fillText(itens[i], 80, 0);
+                ctx.restore();
+            }
+        }
+
+        function atualizarListaItens() {
+            const ul = document.getElementById("listaItens");
+            ul.innerHTML = "";
+            itens.forEach((item, index) => {
+                const li = document.createElement("li");
+                li.innerHTML = `${item} <button onclick="removerItem(${index})">x</button>`;
+                ul.appendChild(li);
+            });
+        }
+
+        function adicionarItem() {
+            const novo = document.getElementById("novoItem").value.trim();
+            if (novo) {
+                itens.push(novo);
+                document.getElementById("novoItem").value = "";
+                atualizarListaItens();
+                desenharRoleta();
+            }
+        }
+
+        function removerItem(index) {
+            itens.splice(index, 1);
+            atualizarListaItens();
+            desenharRoleta();
+            document.getElementById("resultado").textContent = "";
+        }
+
+        function animarRoleta() {
+            if (velocidade > 0.002) {
+                anguloAtual += velocidade;
+                velocidade *= 0.98;
+                desenharRoleta();
+                requestAnimationFrame(animarRoleta);
+            } else {
+                velocidade = 0;
+                girando = false;
+                const total = itens.length;
+                if (total > 0) {
+                    const anguloPorItem = 2 * Math.PI / total;
+                    const anguloFinal = (anguloAtual + Math.PI * 2) % (Math.PI * 2);
+                    const index = Math.floor(((Math.PI * 1.5 - anguloFinal + 2 * Math.PI) % (2 * Math.PI)) / anguloPorItem);
+                    document.getElementById("resultado").textContent = `Resultado: ${itens[index]}`;
+                } else {
+                    document.getElementById("resultado").textContent = "Adicione itens à roleta!";
+                }
+            }
+        }
+
+        function girarRoleta() {
+            if (girando || itens.length === 0) {
+                if (itens.length === 0) {
+                    document.getElementById("resultado").textContent = "Adicione itens à roleta!";
+                }
+                return;
+            }
+            document.getElementById("resultado").textContent = "";
+            velocidade = 0.3 + Math.random() * 0.3;
+            girando = true;
+            animarRoleta();
+        }
+
+        desenharRoleta();
+        atualizarListaItens();
+    </script>
+</body>
+
+</html>

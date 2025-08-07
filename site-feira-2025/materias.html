@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matérias - Ensino Médio Integrado com ADS</title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+        :root {
+            --primary: #00ffe7;
+            --primary-dark: #0a192f;
+            --accent: #1766d1;
+            --card-bg: #101c2c;
+            --text-main: #eaf6fb;
+            --text-accent: #00ffe7;
+            --card-border: #1766d1;
+        }
+
+        /* Reset e básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--primary-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        header {
+            background: #101c2c;
+            color: var(--primary);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 12px rgba(0, 255, 231, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* Container principal */
+        .main-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+
+        .main-container h1 {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 4rem;
+        }
+
+        /* Seção de cada matéria */
+        .materia-section {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(0, 255, 231, 0.07);
+            padding: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .materia-section h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .materia-section h2 i {
+            font-size: 2.5rem;
+        }
+
+        .materia-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .materia-section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .materia-section ul li {
+            background: #132c44;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-main);
+            transition: background 0.3s, color 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        /* EFEITO DE HOVER ADICIONADO AQUI */
+        .materia-section ul li:hover {
+            background: #1e3a5a;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* Separador */
+        .separator {
+            border: 0;
+            height: 2px;
+            background-color: var(--primary);
+            background-image: linear-gradient(to right, rgba(0, 255, 231, 0), var(--primary), rgba(0, 255, 231, 0));
+            margin: 4rem 0;
+        }
+
+        /* Footer moderno */
+        footer {
+            background: #101c2c;
+            color: #eaf6fb;
+            padding: 2rem 1rem 1rem 1rem;
+            margin-top: 3rem;
+            box-shadow: 0 -2px 12px rgba(0, 255, 231, 0.10);
+            border-top: 2px solid var(--primary);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            gap: 0.5rem;
+            color: var(--primary);
+        }
+
+        .footer-logo i {
+            font-size: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            color: var(--primary);
+            font-size: 1.7rem;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #fff;
+        }
+
+        .footer-copy {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            color: #eaf6fb;
+        }
+
+        /* Responsivo */
+        @media (max-width: 900px) {
+            .footer-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-container h1 {
+                font-size: 2.2rem;
+            }
+
+            .materia-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        Ensino Médio Integrado com ADS
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="#">Matérias</a>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <h1 data-aos="fade-down">Matérias do Curso de ADS</h1>
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-code-alt'></i> Programação Back-end</h2>
+            <p>
+                Nesta disciplina, você aprenderá a desenvolver a lógica por trás das aplicações. Vamos explorar as linguagens de programação mais utilizadas no mercado, como Python e Java, além de conceitos fundamentais de algoritmos e estruturas de dados.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Python (Sintaxe e Estruturas de Controle)</li>
+                <li>Java (Orientação a Objetos)</li>
+                <li>Desenvolvimento de APIs RESTful</li>
+                <li>Manipulação de Dados</li>
+                <li>Introdução a Algoritmos</li>
+            </ul>
+        </section>
+
+        <hr class="separator">
+        
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-laptop'></i> Programação Front-end</h2>
+            <p>
+                Aprenda a criar interfaces de usuário atraentes e funcionais. Esta matéria abrange as tecnologias essenciais para o desenvolvimento web, incluindo HTML, CSS e JavaScript, além de frameworks modernos que facilitam a criação de aplicações dinâmicas.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>HTML5 (Estrutura e Semântica)</li>
+                <li>CSS3 (Estilização e Layout)</li>
+                <li>JavaScript (Interatividade e Dinamismo)</li>
+                <li>Frameworks como React ou Vue.js</li>
+                <li>Ferramentas de Build e Automação</li>
+            </ul>
+        </section>
+
+
+        <hr class="separator">
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx-abacus'></i> Análise e Projeto de Sistemas</h2>
+            <p>
+                Explore o ciclo de vida do desenvolvimento de software. Nesta disciplina, você aprenderá a analisar requisitos, projetar sistemas e documentar suas soluções. É uma base essencial para qualquer desenvolvedor que deseja criar aplicações eficientes e escaláveis.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Levantamento de Requisitos</li>
+                <li>Modelagem de Casos de Uso</li>
+                <li>Diagramas UML (Unified Modeling Language)</li>
+                <li>Documentação de Sistemas</li>
+                <li>Metodologias Ágeis (Scrum, Kanban)</li>
+            </ul>
+        </section>
+
+        <hr class="separator">
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-server'></i> Banco de Dados</h2>
+            <p>
+                Aprenda a projetar, implementar e gerenciar bancos de dados. Esta disciplina é fundamental para quem
+                deseja construir sistemas robustos e eficientes, garantindo a organização e a segurança das informações.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Modelagem de Dados</li>
+                <li>SQL (Structured Query Language)</li>
+                <li>Bancos de Dados Relacionais</li>
+                <li>Introdução a Bancos de Dados NoSQL</li>
+                <li>Normalização e Otimização</li>
+            </ul>
+        </section>
+
+        <hr class="separator">
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-mobile-alt'></i> Desenvolvimento Mobile</h2>
+            <p>
+                Desenvolva aplicações que qualquer um pode baixar! Nesta matéria, você utilizará frameworks modernos para
+                criar aplicações que funcionam em sistemas Android e iOS, do protótipo à publicação na loja de apps.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Fundamentos de UI/UX Mobile</li>
+                <li>Criação de Telas e Navegação</li>
+                <li>Acesso a APIs e Dados</li>
+                <li>Testes em Emuladores e Dispositivos</li>
+                <li>Introdução a Frameworks como Flutter ou React Native</li>
+            </ul>            
+        </section>
+
+        <hr class="separator">
+        
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-server'></i> Redes de Computadores</h2>
+            <p>
+                Aprenda a configurar e gerenciar redes de computadores. Esta disciplina é essencial para entender como os sistemas se comunicam, garantindo a segurança e a eficiência das conexões.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Fundamentos de Redes</li>
+                <li>Protocolos de Comunicação (TCP/IP)</li>
+                <li>Configuração de Roteadores e Switches</li>
+                <li>Segurança em Redes</li>
+                <li>Monitoramento e Diagnóstico de Redes</li>
+            </ul>
+
+        </section>
+        
+        <hr class="separator">
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-shield'></i> Segurança da Informação</h2>
+            <p>
+                Proteja seus sistemas e dados! Nesta matéria, você aprenderá sobre as melhores práticas de segurança, criptografia e como proteger aplicações contra ameaças cibernéticas.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Fundamentos de Segurança da Informação</li>
+                <li>Criptografia e Autenticação</li>
+                <li>Segurança em Aplicações Web</li>
+                <li>Testes de Penetração (Pentesting)</li>
+                <li>Políticas de Segurança e Compliance</li>
+            </ul>
+
+        </section>
+
+        <hr class="separator">
+
+        <section class="materia-section" data-aos="fade-up">
+            <h2><i class='bx bx-arrow-to-top'></i> Rede de Computadores</h2>
+            <p>
+                Descubra como as redes conectam dispositivos e permitem a comunicação entre eles. Aprenda sobre protocolos, roteamento e segurança de redes.
+            </p>
+            <h3>Tópicos abordados:</h3>
+            <ul>
+                <li>Fundamentos de Redes</li>
+                <li>Protocolos de Comunicação</li>
+                <li>Configuração de Roteadores e Switches</li>
+                <li>Segurança em Redes</li>
+                <li>Monitoramento e Diagnóstico de Redes</li>
+            </ul>
+        </section>
+        
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class='bx bx-code-alt'></i>
+                <span>Ensino Médio Integrado com ADS</span>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class='bx bxl-instagram'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+            </div>
+        </div>
+        <div class="footer-copy">
+            &copy; 2025 Ensino Médio Integrado com ADS. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 900,
+            once: true
+        });
+    </script>
+</body>
+
+</html>
